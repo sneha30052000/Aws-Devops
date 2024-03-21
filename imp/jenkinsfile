@@ -11,5 +11,10 @@ steps{
 sh 'echo "Test done"'
 }
 }
+stage('output'){
+steps{
+sh 'echo "I work with linux"
+}
+}
 }
 }
