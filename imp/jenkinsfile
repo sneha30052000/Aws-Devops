@@ -1,9 +1,9 @@
 pipeline{
-agent any
+agent {label node1}
 stages{
 stage('build'){
 steps {
-sh 'echo "this is sneha"'
+sh 'echo "this is sneha working with `hostname`"'
 }
 }
 stage('test'){
