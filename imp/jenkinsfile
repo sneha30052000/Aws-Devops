@@ -1,0 +1,20 @@
+pipeline{
+agent {label 'node1'}
+stages{
+stage('build'){
+steps {
+sh 'echo "this is sneha working with `hostname`"'
+}
+}
+stage('test'){
+steps{
+sh 'echo "Test done"'
+}
+}
+stage('output'){
+steps{
+sh 'echo "I work with `uname`"'
+}
+}
+}
+}
