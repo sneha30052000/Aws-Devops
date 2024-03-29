@@ -1,32 +1,8 @@
-pipeline {
-    agent any
-    
-    stages {
-        stage('Retrieve Server Details') {
-            steps {
-                script {
-def masterDetails = [
-                        'Name': env.NODE_NAME,
-                        'Description': env.NODE_DESCRIPTION,
-                        'OS': env.NODE_OS
-                        // Add more details as needed
-                    ]
-                    echo "Master Server Details:"
-                    echo masterDetails
-
- def slaves = Jenkins.instance.slaves
-                    def slaveDetails = [:]
-for (slave in slaves) {
-                        slaveDetails[slave.name] = [
-                            'Name': slave.name,
-                            'Description': slave.nodeDescription,
-                            'OS': slave.getLauncher().getHost().getOperatingSystem()
- ]
-                    }
-echo "Slave Server Details:"
-                    echo slaveDetails
-                }
-            }
-        }
-    }
+pipeline{
+agent {label 'node1'}
+stages{
+stage('build'){
+steps {
+sh 'echo "this is sneha working with `hostname`"'
+}
 }
