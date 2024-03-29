@@ -5,34 +5,25 @@ pipeline {
         stage('Retrieve Server Details') {
             steps {
                 script {
-                    // Retrieve master server details
-                    def masterDetails = [
+def masterDetails = [
                         'Name': env.NODE_NAME,
                         'Description': env.NODE_DESCRIPTION,
                         'OS': env.NODE_OS
                         // Add more details as needed
                     ]
-                    
-                    // Print master server details
                     echo "Master Server Details:"
                     echo masterDetails
-                    
-                    // Retrieve details of connected slave nodes
-                    def slaves = Jenkins.instance.slaves
+
+ def slaves = Jenkins.instance.slaves
                     def slaveDetails = [:]
-                    
-                    // Iterate through all slave nodes
-                    for (slave in slaves) {
+for (slave in slaves) {
                         slaveDetails[slave.name] = [
                             'Name': slave.name,
                             'Description': slave.nodeDescription,
-                            'OS': slave.getLauncher().getHost().getOperatingSystem().toString()
-                            // Add more details as needed
-                        ]
+                            'OS': slave.getLauncher().getHost().getOperatingSystem()
+ ]
                     }
-                    
-                    // Print slave server details
-                    echo "Slave Server Details:"
+echo "Slave Server Details:"
                     echo slaveDetails
                 }
             }
